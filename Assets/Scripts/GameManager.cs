@@ -20,6 +20,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text speedMultiplierText;
 
+    [System.Serializable]
+    class SpawnSetting
+    {
+        public GameObject itemPrefab;
+        public bool spawnAfterScore;
+        public float spawnInterval;
+        public float spawnScoreInterval;
+        SpawnSetting() { itemPrefab = null; spawnAfterScore = false; spawnInterval = 5f; spawnScoreInterval = 10f; }
+    }
+
+    [SerializeField]
+    private SpawnSetting[] itemSpawnSettings;
 
     void Start()
     {

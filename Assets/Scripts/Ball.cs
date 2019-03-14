@@ -52,7 +52,6 @@ public class Ball : MonoBehaviour
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
     }
 
-
     public void SetVelocity(Vector2 newVelocity)
     {
         rb.velocity = newVelocity;

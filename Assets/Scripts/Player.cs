@@ -7,13 +7,10 @@ public class Player : MonoBehaviour
     [Header("Settings")]
     [SerializeField]
     private float moveSpeed = 2;
-
-    [SerializeField]
-    private float maxVelocity = 2;
+    private float initMoveSpeed;
 
     [SerializeField]
     private int playerIndex = 0;
-
 
     [Header("Stats")]
     [SerializeField]
@@ -26,6 +23,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        initMoveSpeed = moveSpeed;
+
 
         if (playerIndex == 0)
         {
@@ -76,5 +76,40 @@ public class Player : MonoBehaviour
 
         transform.position = temp;
 
+    }
+
+    public void SetPlayerWidthMultiplier(float multiplier)
+    {
+        transform.localScale.Set(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
+    }
+
+    public void SetPlayerHeightMultiplier(float multiplier)
+    {
+        transform.localScale.Set(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
+    }
+
+    public void SetPlayerSizeMultiplier(float multiplier)
+    {
+        transform.localScale.Set(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
+    }
+
+    public void ResetPlayerSize()
+    {
+        transform.localScale.Set(1, 1, 1);
+    }
+
+    public void SetPlayerSpeedMultiplier(float multiplier)
+    {
+        moveSpeed *= multiplier;
+    }
+
+    public void SetPlayerSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetPlayerSpeed()
+    {
+        moveSpeed = initMoveSpeed;
     }
 }
