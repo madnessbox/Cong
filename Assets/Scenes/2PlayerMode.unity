@@ -1283,6 +1283,17 @@ PrefabInstance:
       propertyPath: speedMultiplierText
       value: 
       objectReference: {fileID: 2051648290}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[0].itemPrefab
+      value: 
+      objectReference: {fileID: 5423797104720720598, guid: 27d3c1cea26587845a8c258ac1588dbc,
+        type: 3}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[0].spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bda0f45e5d03364bb6e9d999c28af98, type: 3}
 --- !u!1001 &5423797103330926652
@@ -1352,5 +1363,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 5423797104720720593, guid: 27d3c1cea26587845a8c258ac1588dbc,
+        type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 1308204866}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27d3c1cea26587845a8c258ac1588dbc, type: 3}

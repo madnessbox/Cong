@@ -8,6 +8,9 @@ public class Ball : MonoBehaviour
     public float ballSpeedIncrease = 0.2f;
     public GameManager gm;
 
+
+    public Player latestBouncedPlayer { get; private set; }
+    
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
     private bool isMultiball = false;
@@ -56,6 +59,11 @@ public class Ball : MonoBehaviour
         rb.velocity *= 1 + ballSpeedIncrease;
         ballSpeedDelta += ballSpeedIncrease;
 
+        if (collision.gameObject.GetComponent<Player>() != null)
+        {
+            latestBouncedPlayer = collision.gameObject.GetComponent<Player>();
+            print(latestBouncedPlayer);
+        }
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
     }

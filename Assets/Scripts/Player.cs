@@ -80,22 +80,22 @@ public class Player : MonoBehaviour
 
     public void SetPlayerWidthMultiplier(float multiplier)
     {
-        transform.localScale.Set(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
     }
 
     public void SetPlayerHeightMultiplier(float multiplier)
     {
-        transform.localScale.Set(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
     }
 
     public void SetPlayerSizeMultiplier(float multiplier)
     {
-        transform.localScale.Set(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
     }
 
     public void ResetPlayerSize()
     {
-        transform.localScale.Set(1, 1, 1);
+        transform.localScale = new Vector3(1, 1, 1);
     }
 
     public void SetPlayerSpeedMultiplier(float multiplier)
