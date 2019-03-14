@@ -58,12 +58,16 @@ public class Player : MonoBehaviour
 
 
         if ((playerIndex == 0 && Input.GetAxisRaw("Player1Horizontal") > 0) ||
-            (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") > 0))
+            (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") > 0) ||
+            (playerIndex == 2 && Input.GetAxisRaw("Player3Horizontal") > 0) ||
+            (playerIndex == 3 && Input.GetAxisRaw("Player4Horizontal") > 0))
         {
             angle += moveSpeed * Time.deltaTime;
         }
         else if((playerIndex == 0 && Input.GetAxisRaw("Player1Horizontal") < 0) ||
-           (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") < 0))
+                (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") < 0) ||
+                (playerIndex == 2 && Input.GetAxisRaw("Player3Horizontal") < 0) ||
+                (playerIndex == 3 && Input.GetAxisRaw("Player4Horizontal") < 0))
         {
             angle -= moveSpeed * Time.deltaTime;
         }
