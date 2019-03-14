@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
 
     private Rigidbody2D rb;
+    [SerializeField]
     private float angle = 0;
 
     void Start()
@@ -26,14 +27,20 @@ public class Player : MonoBehaviour
 
         initMoveSpeed = moveSpeed;
 
-
-        if (playerIndex == 0)
+        switch (playerIndex)
         {
-            angle = Mathf.PI;
-        }
-        else
-        {
-            angle = 0;
+            case 0:
+                angle = Mathf.PI;
+                break;
+            case 1:
+                angle = 0;
+                break;
+            case 2:
+                angle = Mathf.PI / 2;
+                break;
+            case 3:
+                angle = 3 * (Mathf.PI / 2);
+                break;
         }
     }
 
