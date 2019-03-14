@@ -18,4 +18,13 @@ public class SpeedChanger : MonoBehaviour
     {
         transform.Rotate(Vector3.forward, spinSpeed);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Ball>() != null)
+        {
+            collision.GetComponent<Ball>().MultiplyVelocity(SpeedMultiplier);
+            Destroy(this);
+        }
+    }
 }

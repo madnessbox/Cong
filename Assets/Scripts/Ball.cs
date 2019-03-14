@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// Todo: Refactor code to be seperated into ScoreManager / GameManager
 public class Ball : MonoBehaviour
 {
     public float ballSpeed;
@@ -12,7 +10,7 @@ public class Ball : MonoBehaviour
 
     private float ballSpeedDelta = 0;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private TrailRenderer tr;
 
     
@@ -54,14 +52,25 @@ public class Ball : MonoBehaviour
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public void SetVelocity(Vector2 newVelocity)
     {
-        if (collision.GetComponent<SpeedChanger>() != null)
-        {
-            rb.velocity *= collision.GetComponent<SpeedChanger>().SpeedMultiplier;
-            ballSpeedDelta = 1 - collision.GetComponent<SpeedChanger>().SpeedMultiplier;
-            gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
-            Destroy(collision.gameObject);
-        }
+        rb.velocity = newVelocity;
+        ballSpeedDelta = 1 - (newVelocity - rb.velocity).magnitude;
+        gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
+    }
+
+    public void MultiplyVelocity(float multiplier)
+    {
+        rb.velocity *= multiplier;
+        ballSpeedDelta = 1 - multiplier;
+        gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
+    }
+
+    public void StopVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        ballSpeedDelta = 1;
+        gm.SetSpeedMultiplierText(1);
     }
 }
