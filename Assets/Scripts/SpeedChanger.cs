@@ -16,7 +16,6 @@ public class SpeedChanger : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
-            collision.GetComponentInParent<Ball>().latestBouncedPlayer?.SetPlayerSizeMultiplier(5);
             collision.GetComponentInParent<Ball>().MultiplyVelocity(SpeedMultiplier);
             Destroy(this.gameObject);
         }
