@@ -34,7 +34,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        foreach (SpawnSetting toSpawn in itemSpawnSettings)
+        {
+            if (toSpawn.spawnAfterScore == false && 
+                toSpawn.itemPrefab != null && 
+                toSpawn.spawnInterval > 1)
+            {
+                StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
+            }
+        }
     }
 
     
@@ -74,10 +82,18 @@ public class GameManager : MonoBehaviour
         speedMultiplierText.text = "x" + value.ToString();
     }
 
-    public void SpawnSpeedChangerWithValue(float value)
+    public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)
     {
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
-        SpeedChanger speedChangerScript = Instantiate(speedChanger, randomPos, Quaternion.identity)?.GetComponent<SpeedChanger>();
+        GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
+        StartCoroutine(StartPickupTimer(pickupToSpawn, timeBetweenSpawns));
     }
+
+    IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
+    {
+        yield return new WaitForSeconds(timeBetweenSpawns);
+        SpawnPickup(pickupToSpawn, timeBetweenSpawns);
+    }
+
 }
