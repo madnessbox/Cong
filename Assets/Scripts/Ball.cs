@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
 
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
+    private bool isMultiball = false;
 
     public Rigidbody2D rb;
     private TrailRenderer tr;
@@ -28,6 +29,11 @@ public class Ball : MonoBehaviour
     {
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
+            if (isMultiball)
+            {
+                Destroy(this.gameObject);
+            }
+
             tr.enabled = false;
             tr.Clear();
             rb.velocity = Vector2.zero;
@@ -73,5 +79,10 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero;
         ballSpeedDelta = 1;
         gm.SetSpeedMultiplierText(1);
+    }
+
+    public void setMultiball(bool value)
+    {
+        isMultiball = value;
     }
 }
