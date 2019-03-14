@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     public GameManager gm;
 
     private float ballSpeedDelta = 0;
+    private float initBallSpeed;
 
     public Rigidbody2D rb;
     private TrailRenderer tr;
@@ -18,6 +19,7 @@ public class Ball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
+        initBallSpeed = ballSpeed;
 
         Launch();
     }
@@ -62,7 +64,7 @@ public class Ball : MonoBehaviour
     public void MultiplyVelocity(float multiplier)
     {
         rb.velocity *= multiplier;
-        ballSpeedDelta = 1 - multiplier;
+        ballSpeedDelta += (multiplier - 1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
     }
 

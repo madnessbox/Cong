@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpeedChanger : MonoBehaviour
 {
-
     public float SpeedMultiplier = 0.8f;
     public float spinSpeed = 2;
 
@@ -15,10 +14,10 @@ public class SpeedChanger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Ball>() != null)
+        if (collision.GetComponentInParent<Ball>() != null)
         {
-            collision.GetComponent<Ball>().MultiplyVelocity(SpeedMultiplier);
-            Destroy(this);
+            collision.GetComponentInParent<Ball>().MultiplyVelocity(SpeedMultiplier);
+            Destroy(this.gameObject);
         }
     }
 }

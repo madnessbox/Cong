@@ -21,13 +21,12 @@ public class GameManager : MonoBehaviour
     private Text speedMultiplierText;
 
     [System.Serializable]
-    class SpawnSetting
+    struct SpawnSetting
     {
         public GameObject itemPrefab;
         public bool spawnAfterScore;
         public float spawnInterval;
         public float spawnScoreInterval;
-        SpawnSetting() { itemPrefab = null; spawnAfterScore = false; spawnInterval = 5f; spawnScoreInterval = 10f; }
     }
 
     [SerializeField]
