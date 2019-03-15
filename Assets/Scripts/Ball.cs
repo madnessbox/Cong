@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     public float ballSpeed;
     public float ballSpeedIncrease = 0.2f;
     public GameManager gm;
-
+    public bool rotateTowardsVelocity;
 
     public Player latestBouncedPlayer { get; private set; }
     
@@ -30,6 +30,18 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        if (rotateTowardsVelocity)
+        {
+            Vector3 velDirection = rb.velocity.normalized;
+            float angle = Mathf.Atan2(velDirection.y, velDirection.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.AngleAxis(angle - 90, transform.forward);
+
+            Debug.DrawLine(transform.position, transform.position + velDirection * 5);
+
+            //transform.rotation = Quaternion.Euler(0,0,);
+        }
+
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
             if (isMultiball)
