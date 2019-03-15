@@ -1653,6 +1653,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+<<<<<<< HEAD
       - m_Target: {fileID: 128040285}
         m_MethodName: SetActive
         m_Mode: 6
