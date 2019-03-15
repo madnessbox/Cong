@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
 
 
     private Rigidbody2D rb;
-    [SerializeField]
     private float angle = 0;
+    private int invertVal = 1;
 
     void Start()
     {
@@ -69,14 +69,14 @@ public class Player : MonoBehaviour
             (playerIndex == 2 && Input.GetAxisRaw("Player3Horizontal") > 0) ||
             (playerIndex == 3 && Input.GetAxisRaw("Player4Horizontal") > 0))
         {
-            angle += moveSpeed * Time.deltaTime;
+            angle += moveSpeed * Time.deltaTime * invertVal;
         }
         else if((playerIndex == 0 && Input.GetAxisRaw("Player1Horizontal") < 0) ||
                 (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") < 0) ||
                 (playerIndex == 2 && Input.GetAxisRaw("Player3Horizontal") < 0) ||
                 (playerIndex == 3 && Input.GetAxisRaw("Player4Horizontal") < 0))
         {
-            angle -= moveSpeed * Time.deltaTime;
+            angle -= moveSpeed * Time.deltaTime * invertVal;
         }
 
 
@@ -122,5 +122,17 @@ public class Player : MonoBehaviour
     public void ResetPlayerSpeed()
     {
         moveSpeed = initMoveSpeed;
+    }
+
+    public void SetPlayerControlsInverted(bool isInverted)
+    {
+        if (isInverted)
+        {
+            invertVal = -1;
+        }
+        else
+        {
+            invertVal = 1;
+        }
     }
 }
