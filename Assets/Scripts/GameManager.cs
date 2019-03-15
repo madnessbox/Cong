@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private SpawnSetting[] itemSpawnSettings;
 
+    private List<SpawnSetting> itemsToSpawnAfterScore = new List<SpawnSetting>();
+
     void Start()
     {
         if (PlayerPrefs.HasKey("Is4Player"))
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
             }
+            else if (toSpawn.spawnAfterScore)
+            {
+                itemsToSpawnAfterScore.Add(toSpawn);
+            }
         }
     }
 
@@ -63,6 +69,14 @@ public class GameManager : MonoBehaviour
     {
         score += amount;
         scoreText.text = score.ToString();
+
+        foreach (SpawnSetting toSpawn in itemsToSpawnAfterScore)
+        {
+            if (score % toSpawn.spawnScoreInterval == 0)
+            {
+                SpawnPickup(toSpawn.itemPrefab);
+            }
+        }
     }
 
     public void DecreaseScore(int amount)
@@ -87,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void SetSpeedMultiplierText(float value)
     {
-        speedMultiplierText.text = "x" + value.ToString();
+        speedMultiplierText.text = "x" + value.ToString("0.0");
     }
 
     public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -96,6 +110,13 @@ public class GameManager : MonoBehaviour
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
         StartCoroutine(StartPickupTimer(pickupToSpawn, timeBetweenSpawns));
+    }
+
+    public void SpawnPickup(GameObject pickupToSpawn)
+    {
+        float randomAngle = Random.Range(0f, Mathf.PI * 2);
+        Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
+        GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
     }
 
     IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
