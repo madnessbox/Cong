@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject optionsMenu;
+    public GameObject gameModeMenu;
 
     private bool bOptionsIsActive = false;
+    private bool bGameModeIsActive = false;
 
     public void PlayGame()
     {
