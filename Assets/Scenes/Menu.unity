@@ -1657,6 +1657,11 @@ MonoBehaviour:
       - m_Target: {fileID: 128040285}
         m_MethodName: SetActive
         m_Mode: 6
+=======
+      - m_Target: {fileID: 1032402100}
+        m_MethodName: PlayGame
+        m_Mode: 1
+>>>>>>> 7fa3d36a330a818c50fe54b92a14df9ce970df9f
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
