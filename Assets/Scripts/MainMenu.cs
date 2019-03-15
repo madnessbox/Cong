@@ -18,4 +18,16 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Set4Player()
+    {
+        PlayerPrefs.SetInt("Is4Player", 1);
+        PlayerPrefs.Save();
+    }
+
+    public void Set2Player()
+    {
+        PlayerPrefs.SetInt("Is4Player", 0);
+        PlayerPrefs.Save();
+    }
 }

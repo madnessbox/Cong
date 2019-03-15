@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text speedMultiplierText;
 
+    [SerializeField]
+    private GameObject[] playerObjects;
+
     [System.Serializable]
     struct SpawnSetting
     {
@@ -34,6 +37,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("Is4Player"))
+        {
+            if (PlayerPrefs.GetInt("Is4Player") == 1)
+            {
+                playerObjects[2].SetActive(true);
+                playerObjects[3].SetActive(true);
+            }
+        }
+        
+
+
         foreach (SpawnSetting toSpawn in itemSpawnSettings)
         {
             if (toSpawn.spawnAfterScore == false && 
