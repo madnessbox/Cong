@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
                 itemsToSpawnAfterScore.Add(toSpawn);
             }
         }
+
+        SpawnBall(false);
     }
 
     private void FixedUpdate()
