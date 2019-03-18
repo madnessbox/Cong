@@ -8,11 +8,6 @@ public class MultiBallScript : MonoBehaviour
     public GameObject ball;
     public GameManager gm;
 
-    private void Start()
-    {
-        gm = FindObjectOfType<GameManager>();
-    }
-
     void Update()
     {
         transform.Rotate(Vector3.forward, spinSpeed);
@@ -24,7 +19,7 @@ public class MultiBallScript : MonoBehaviour
         {
             //var ballInstance = Instantiate(ball);
             //ballInstance.GetComponent<Ball>().setMultiball(true);
-            gm.SpawnBall();
+            gm.SpawnBall(true);
             Debug.Log("MULTIBALL!!");
             Destroy(this.gameObject);
         }

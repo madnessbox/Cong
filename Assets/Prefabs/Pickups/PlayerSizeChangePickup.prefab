@@ -120,4 +120,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSizeMultiplier: 2
-  isPlayerGrowing: 1
+  duration: 5
+  hasTimer: 1

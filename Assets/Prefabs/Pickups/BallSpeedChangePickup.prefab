@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5423797104720720595}
   - component: {fileID: 5423797104720720593}
   m_Layer: 0
-  m_Name: SpeedChangePickup
+  m_Name: BallSpeedChangePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,5 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f2c319baa0ce34288cf00844bf3249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedDecrease: 0.8
+  SpeedMultiplier: 0.8
   spinSpeed: 5
+  isSpeedIncreasing: 1
