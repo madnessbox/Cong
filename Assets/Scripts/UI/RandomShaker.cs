@@ -37,5 +37,22 @@ public class RandomShaker : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(maxRotation * Mathf.Sin(Time.time * speed), -maxRotation * Mathf.Sin(Time.time * speed), maxRotation * Mathf.Sin(Time.time * speed * 2));
 
+
+        /*if ((Mathf.Abs(euler.z) * Mathf.Rad2Deg) - (Mathf.Abs(transform.eulerAngles.z) * Mathf.Rad2Deg) < 0.1f)
+        {
+            if (transform.eulerAngles.z < 0)
+            {
+                euler.z = Random.Range(initEuler.z - 20f, 0);
+            }
+            else
+            {
+                euler.z = Random.Range(0, initEuler.z + 20f);
+            }
+            
+        }
+
+        transform.Rotate(transform.forward, euler.z * Time.deltaTime);
+        //transform.eulerAngles = euler;*/
+
     }
 }
