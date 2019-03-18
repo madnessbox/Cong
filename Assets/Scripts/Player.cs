@@ -17,9 +17,13 @@ public class Player : MonoBehaviour
     private float velocity = 0;
 
 
+    private float beforeMoveSpeed = 0;
+    private Vector3 beforeScale;
+
     private Rigidbody2D rb;
     private float angle = 0;
     private int invertVal = 1;
+    private delegate void EndPickupDelegate();
 
     void Start()
     {
@@ -89,19 +93,45 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetPlayerWidthMultiplier(float multiplier)
+    public void SetPlayerWidthMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
+        beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
+
+        if (hasTimer)
+        {
+            EndPickupDelegate del = EndPlayerSizePickup;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
     }
 
-    public void SetPlayerHeightMultiplier(float multiplier)
+    public void SetPlayerHeightMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
+        beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
+
+        if (hasTimer)
+        {
+            EndPickupDelegate del = EndPlayerSizePickup;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
     }
 
-    public void SetPlayerSizeMultiplier(float multiplier)
+    public void SetPlayerSizeMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
+        beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
+
+        if (hasTimer)
+        {
+            EndPickupDelegate del = EndPlayerSizePickup;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
+    }
+
+    private void EndPlayerSizePickup()
+    {
+        transform.localScale = beforeScale;
     }
 
     public void ResetPlayerSize()
@@ -109,14 +139,35 @@ public class Player : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
     }
 
-    public void SetPlayerSpeedMultiplier(float multiplier)
+
+
+    public void SetPlayerSpeedMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
+        beforeMoveSpeed = moveSpeed;
         moveSpeed *= multiplier;
+
+        if (hasTimer)
+        {
+            EndPickupDelegate del = EndPlayerSpeedPickup;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
     }
 
-    public void SetPlayerSpeed(float newSpeed)
+    public void SetPlayerSpeed(float newSpeed, bool hasTimer = false, float affectedTime = 2f)
     {
+        beforeMoveSpeed = moveSpeed;
         moveSpeed = newSpeed;
+
+        if (hasTimer)
+        {
+            EndPickupDelegate del = EndPlayerSpeedPickup;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
+    }
+
+    private void EndPlayerSpeedPickup()
+    {
+        moveSpeed = beforeMoveSpeed;
     }
 
     public void ResetPlayerSpeed()
@@ -134,5 +185,11 @@ public class Player : MonoBehaviour
         {
             invertVal = 1;
         }
+    }
+
+    IEnumerator PickupTimer(float timeAffected, EndPickupDelegate method)
+    {
+        yield return new WaitForSeconds(timeAffected);
+        method();
     }
 }
