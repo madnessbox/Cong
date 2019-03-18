@@ -38,8 +38,6 @@ public class Ball : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle - 90, transform.forward);
 
             Debug.DrawLine(transform.position, transform.position + velDirection * 5);
-
-            //transform.rotation = Quaternion.Euler(0,0,);
         }
 
         if ((transform.position - Vector3.zero).magnitude > 6f)
@@ -49,12 +47,6 @@ public class Ball : MonoBehaviour
                 Destroy(this.gameObject);
             }
 
-            tr.enabled = false;
-            tr.Clear();
-            rb.velocity = Vector2.zero;
-            transform.position = Vector3.zero;
-            Launch();
-            tr.enabled = true;
         }
     }
 

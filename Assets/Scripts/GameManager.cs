@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField]
     private GameObject speedChanger;
+    [SerializeField]
+    private GameObject ballPrefab;
 
     [Header("References")]
     [SerializeField]
@@ -123,6 +125,12 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenSpawns);
         SpawnPickup(pickupToSpawn, timeBetweenSpawns);
+    }
+
+
+    public void SpawnBall()
+    {
+        Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
     }
 
 }
