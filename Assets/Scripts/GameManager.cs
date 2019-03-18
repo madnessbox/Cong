@@ -130,9 +130,8 @@ public class GameManager : MonoBehaviour
 
     public void SpawnBall()
     {
-        Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
         Ball ballTemp = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity)?.GetComponent<Ball>();
-        ballTemp.GetComponent<Ball>().gm = this;
+        ballTemp.gm = this;
     }
 
 }

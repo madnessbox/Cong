@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetPlayerWidthMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerWidthMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
         beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetPlayerHeightMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerHeightMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
         beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetPlayerSizeMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerSizeMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
         beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
 
 
 
-    public void SetPlayerSpeedMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerSpeedMultiplier(float multiplier, bool hasTimer = false, float affectedTime = 2f)
     {
         beforeMoveSpeed = moveSpeed;
         moveSpeed *= multiplier;
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetPlayerSpeed(float newSpeed, float affectedTime, bool hasTimer)
+    public void SetPlayerSpeed(float newSpeed, bool hasTimer = false, float affectedTime = 2f)
     {
         beforeMoveSpeed = moveSpeed;
         moveSpeed = newSpeed;

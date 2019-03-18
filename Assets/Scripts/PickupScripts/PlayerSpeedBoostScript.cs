@@ -5,9 +5,7 @@ using UnityEngine;
 public class PlayerSpeedBoostScript : MonoBehaviour
 {
     private float spinSpeed = 5;
-    private float newSpeed = 3;
-    public float duration = 5;
-    public bool hasTimer = true;
+    private float newSpeed = 3; 
 
     void Update()
     {
@@ -18,7 +16,7 @@ public class PlayerSpeedBoostScript : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)                 
         {
-            collision.GetComponentInParent<Ball>().latestBouncedPlayer.SetPlayerSpeed(newSpeed, duration, hasTimer);
+            collision.GetComponentInParent<Ball>().latestBouncedPlayer.SetPlayerSpeed(newSpeed);
             Debug.Log("Player BOOST!!");                                   
             Destroy(gameObject);    
         }
