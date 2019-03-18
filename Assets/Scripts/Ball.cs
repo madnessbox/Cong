@@ -55,7 +55,6 @@ public class Ball : MonoBehaviour
 
     void Launch()
     {
-        gm.ResetScoreAndSpeedMultiplier();
         ballSpeedDelta = 0;
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         rb.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * ballSpeed;

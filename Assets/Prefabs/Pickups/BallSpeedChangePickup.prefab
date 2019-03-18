@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f2c319baa0ce34288cf00844bf3249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: 0.8
+  SpeedMultiplier: 0.9
   spinSpeed: 5
   isSpeedIncreasing: 1

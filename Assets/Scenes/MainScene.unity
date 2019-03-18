@@ -1512,6 +1512,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4247790147616847620, guid: b3b6c97e4875aeb40828e71504d6054e,
         type: 3}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[0].spawnInterval
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[3].spawnInterval
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[1].spawnInterval
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[2].spawnInterval
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
+        type: 3}
+      propertyPath: itemSpawnSettings.Array.data[1].spawnAfterScore
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4683799943436284764, guid: 3bda0f45e5d03364bb6e9d999c28af98,
         type: 3}
       propertyPath: m_LocalPosition.x

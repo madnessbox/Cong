@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int bps = 0;
     private float currentTime = 0;
-    private float scoreMultiplier = 0;
+    private float scoreMultiplier = 1;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int amount)
     {
-        score += amount;
+        score += (int)(500f * scoreMultiplier);
         scoreText.text = score.ToString();
 
         foreach (SpawnSetting toSpawn in itemsToSpawnAfterScore)
@@ -124,8 +124,8 @@ public class GameManager : MonoBehaviour
 
     public void SetBpsMultiplierText()
     {
-        scoreMultiplier = score / Time.time;
-        bpsText.text = (scoreMultiplier * 3).ToString("0.0");
+        scoreMultiplier = 1 + (bps / Time.time);
+        bpsText.text = (scoreMultiplier).ToString("0.0");
     }
 
     public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)

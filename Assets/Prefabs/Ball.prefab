@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8104b80a027e46948a3d92997c3ae045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 3
-  ballSpeedIncrease: 0.1
+  ballSpeed: 4
+  ballSpeedIncrease: 0.02
   gm: {fileID: 0}
   rotateTowardsVelocity: 1
   rb: {fileID: 0}
