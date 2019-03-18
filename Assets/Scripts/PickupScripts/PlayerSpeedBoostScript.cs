@@ -6,7 +6,7 @@ public class PlayerSpeedBoostScript : MonoBehaviour
 {
     private float spinSpeed = 5;
     private float newSpeed = 3;
-    public float duration = 5;
+    public float duration = 10;
     public bool hasTimer = true;
 
     void Update()

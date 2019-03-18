@@ -6,7 +6,7 @@ public class PlayerSizeChange : MonoBehaviour
 {
 
     public float playerSizeMultiplier = 2;
-    public float duration = 5;
+    public float duration = 15;
     public bool hasTimer = true;
 
 
