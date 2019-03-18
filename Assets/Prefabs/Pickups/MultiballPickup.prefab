@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7850252745368802243}
   m_Layer: 0
   m_Name: MultiballPickup
-  m_TagString: Untagged
+  m_TagString: Multiball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinSpeed: 5
   ball: {fileID: 4247790147616847620, guid: b3b6c97e4875aeb40828e71504d6054e, type: 3}
+  gm: {fileID: 0}

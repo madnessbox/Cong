@@ -6,6 +6,7 @@ public class MultiBallScript : MonoBehaviour
 {
     public float spinSpeed = 5;
     public GameObject ball;
+    public GameManager gm;
 
     void Update()
     {
@@ -16,8 +17,9 @@ public class MultiBallScript : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
-            var ballInstance = Instantiate(ball);
-            ballInstance.GetComponent<Ball>().setMultiball(true);
+            //var ballInstance = Instantiate(ball);
+            //ballInstance.GetComponent<Ball>().setMultiball(true);
+            gm.SpawnBall(true);
             Debug.Log("MULTIBALL!!");
             Destroy(this.gameObject);
         }

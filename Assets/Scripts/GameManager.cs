@@ -131,6 +131,10 @@ public class GameManager : MonoBehaviour
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
+        if (pickupToSpawn.tag == "Multiball")
+        {
+            spawnedPickup.GetComponent<MultiBallScript>().gm = this;
+        }
         StartCoroutine(StartPickupTimer(pickupToSpawn, timeBetweenSpawns));
     }
 
@@ -139,6 +143,10 @@ public class GameManager : MonoBehaviour
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
+        //if (pickupToSpawn.tag == "Multiball")
+        //{
+        //    spawnedPickup.GetComponent<MultiBallScript>().gm = this;
+        //}
     }
 
     IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -148,9 +156,13 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SpawnBall()
+    public void SpawnBall(bool multiball)
     {
         Ball ballTemp = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity)?.GetComponent<Ball>();
         ballTemp.gm = this;
+        if (multiball)
+        {
+            ballTemp.setMultiball(true);
+        }
     }
 }
