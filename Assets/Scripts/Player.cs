@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+
     [Header("Settings")]
     [SerializeField]
     private float moveSpeed = 2;

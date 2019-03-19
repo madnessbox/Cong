@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InvertControlls : MonoBehaviour
 {
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,12 @@ public class InvertControlls : MonoBehaviour
     void Update()
     {
         
+       
+
+
     }
+
+
+
+
 }

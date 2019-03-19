@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     [Header("Statistics")]
     [SerializeField]
     private int score = 0;
+    private int bps = 0;
+    private float currentTime = 0;
+    private float scoreMultiplier = 1;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -18,6 +21,9 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private Text scoreText;
+
+    [SerializeField]
+    private Text bpsText;
 
     [SerializeField]
     private Text speedMultiplierText;
@@ -50,8 +56,6 @@ public class GameManager : MonoBehaviour
             }
         }
         
-
-
         foreach (SpawnSetting toSpawn in itemSpawnSettings)
         {
             if (toSpawn.spawnAfterScore == false && 
@@ -65,11 +69,23 @@ public class GameManager : MonoBehaviour
                 itemsToSpawnAfterScore.Add(toSpawn);
             }
         }
+
+        SpawnBall(false);
+    }
+
+    private void FixedUpdate()
+    {
+        SetBpsMultiplierText();
+    }
+
+    public void IncreaseBps(int amount)
+    {
+        bps += amount;
     }
 
     public void IncreaseScore(int amount)
     {
-        score += amount;
+        score += (int)(500f * scoreMultiplier);
         scoreText.text = score.ToString();
 
         foreach (SpawnSetting toSpawn in itemsToSpawnAfterScore)
@@ -104,6 +120,12 @@ public class GameManager : MonoBehaviour
     public void SetSpeedMultiplierText(float value)
     {
         speedMultiplierText.text = "x" + value.ToString("0.0");
+    }
+
+    public void SetBpsMultiplierText()
+    {
+        scoreMultiplier = 1 + (bps / Time.time);
+        bpsText.text = (scoreMultiplier).ToString("0.0");
     }
 
     public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -145,5 +167,4 @@ public class GameManager : MonoBehaviour
             ballTemp.setMultiball(true);
         }
     }
-
 }

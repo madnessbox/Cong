@@ -19,7 +19,19 @@ public class MultiBallScript : MonoBehaviour
         {
             //var ballInstance = Instantiate(ball);
             //ballInstance.GetComponent<Ball>().setMultiball(true);
-            gm.SpawnBall(true);
+            if (Random.Range(0,2) == 1)
+            {
+                gm.SpawnBall(true);
+                gm.SpawnBall(true);
+            }
+            else
+            {
+                gm.SpawnBall(true);
+                gm.SpawnBall(true);
+                gm.SpawnBall(true);
+                gm.SpawnBall(true);
+            }
+            
             Debug.Log("MULTIBALL!!");
             Destroy(this.gameObject);
         }

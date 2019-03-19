@@ -15,6 +15,9 @@ public class Ball : MonoBehaviour
     private float initBallSpeed;
     private bool isMultiball = false;
 
+    private float currentTime = 0f;
+    private float currentBps = 0;
+
     public Rigidbody2D rb;
     private TrailRenderer tr;
 
@@ -52,7 +55,6 @@ public class Ball : MonoBehaviour
 
     void Launch()
     {
-        gm.ResetScoreAndSpeedMultiplier();
         ballSpeedDelta = 0;
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         rb.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * ballSpeed;
@@ -70,6 +72,12 @@ public class Ball : MonoBehaviour
         }
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
+        gm.IncreaseBps(1);
+    }
+
+    public void SetBps()
+    {
+        gm.SetBpsMultiplierText();
     }
 
     public void SetVelocity(Vector2 newVelocity)
