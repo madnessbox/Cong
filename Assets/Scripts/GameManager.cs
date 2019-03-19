@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private int bps = 0;
     private float currentTime = 0;
     private float scoreMultiplier = 1;
+    private bool isRadical = false;
+    private float radicalCounter = 0;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -85,6 +87,19 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int amount)
     {
+
+        if (isRadical)
+        {
+            float combo = 0;
+            radicalCounter += 1;
+            if (radicalCounter == combo)
+            {
+                Radical();
+                combo += 5;
+            }
+            
+        }
+
         score += (int)(500f * scoreMultiplier);
         scoreText.text = score.ToString();
 
@@ -167,4 +182,18 @@ public class GameManager : MonoBehaviour
             ballTemp.isMultiball = true;
         }
     }
+
+
+    //call radical when ballSpeedDelta is over .5
+    public void Radical()
+    {
+
+        Debug.Log("radical!");
+
+    }
+
+
+
+
+
 }

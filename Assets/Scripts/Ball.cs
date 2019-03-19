@@ -21,6 +21,8 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb;
     private TrailRenderer tr;
 
+    public bool radical = false;
+
     
     void Start()
     {
@@ -33,6 +35,17 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        
+
+        if ((ballSpeedDelta) >= 0.5f && (radical == false))
+        {
+            radical = true;
+            gm.Radical();
+
+        }
+
+
+
         if (rotateTowardsVelocity)
         {
             Vector3 velDirection = rb.velocity.normalized;
