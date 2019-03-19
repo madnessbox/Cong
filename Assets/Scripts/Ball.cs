@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
-    private bool isMultiball = false;
+    public bool isMultiball = false;
 
     private float currentTime = 0f;
     private float currentBps = 0;
@@ -50,7 +50,7 @@ public class Ball : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
-            if (testing)
+            if (testing && !isMultiball)
             {
                 Destroy(this.gameObject);
                 gm.SpawnBall(false);
@@ -58,6 +58,7 @@ public class Ball : MonoBehaviour
 
         }
     }
+
 
     void Launch()
     {
@@ -74,7 +75,6 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             latestBouncedPlayer = collision.gameObject.GetComponent<Player>();
-            print(latestBouncedPlayer);
         }
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
@@ -105,10 +105,5 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero;
         ballSpeedDelta = 1;
         gm.SetSpeedMultiplierText(1);
-    }
-
-    public void setMultiball(bool value)
-    {
-        isMultiball = value;
     }
 }

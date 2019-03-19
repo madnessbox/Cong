@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 
         if (hasTimer)
         {
-            EndPickupDelegate del = EndPlayerSizePickup;
+            EndPickupDelegate del = ResetPlayerSize;
             StartCoroutine(PickupTimer(affectedTime, del));
         }
     }
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
         if (hasTimer)
         {
-            EndPickupDelegate del = EndPlayerSizePickup;
+            EndPickupDelegate del = ResetPlayerSize;
             StartCoroutine(PickupTimer(affectedTime, del));
         }
     }
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
         if (hasTimer)
         {
-            EndPickupDelegate del = EndPlayerSizePickup;
+            EndPickupDelegate del = ResetPlayerSize;
             StartCoroutine(PickupTimer(affectedTime, del));
         }
     }

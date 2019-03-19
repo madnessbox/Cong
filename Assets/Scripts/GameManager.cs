@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         ballTemp.gm = this;
         if (multiball)
         {
-            ballTemp.setMultiball(true);
+            ballTemp.isMultiball = true;
         }
     }
 }

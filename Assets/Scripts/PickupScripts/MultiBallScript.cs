@@ -13,26 +13,26 @@ public class MultiBallScript : MonoBehaviour
         transform.Rotate(Vector3.forward, spinSpeed);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
-            //var ballInstance = Instantiate(ball);
-            //ballInstance.GetComponent<Ball>().setMultiball(true);
-            if (Random.Range(0,2) == 1)
+            if (Random.Range(0, 3) == 1)
             {
                 gm.SpawnBall(true);
                 gm.SpawnBall(true);
+                gm.SpawnBall(true);
+                gm.SpawnBall(true);
+                Debug.Log("4x MULTIBALL!!");
             }
             else
             {
                 gm.SpawnBall(true);
                 gm.SpawnBall(true);
-                gm.SpawnBall(true);
-                gm.SpawnBall(true);
+                Debug.Log("2x MULTIBALL!!"); 
             }
             
-            Debug.Log("MULTIBALL!!");
             Destroy(this.gameObject);
         }
     }
