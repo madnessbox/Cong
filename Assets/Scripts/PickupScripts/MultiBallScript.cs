@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MultiBallScript : MonoBehaviour
 {
-    public float spinSpeed = 5;
+    private float spinSpeed = 5;
     public GameObject ball;
     public GameManager gm;
 

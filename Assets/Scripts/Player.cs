@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private float angle = 0;
     private int invertVal = 1;
     private delegate void EndPickupDelegate();
+    private bool haveSizeIncrease = false;
 
     void Start()
     {
@@ -95,44 +96,50 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetPlayerWidthMultiplier(float multiplier, float affectedTime, bool hasTimer)
-    {
-        beforeScale = transform.localScale;
-        transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
+    //CODE NOT BEING USED:
+    //public void SetPlayerWidthMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    //{
+    //    beforeScale = transform.localScale;
+    //    transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
 
-        if (hasTimer)
-        {
-            EndPickupDelegate del = ResetPlayerSize;
-            StartCoroutine(PickupTimer(affectedTime, del));
-        }
-    }
+    //    if (hasTimer)
+    //    {
+    //        EndPickupDelegate del = ResetPlayerSize;
+    //        StartCoroutine(PickupTimer(affectedTime, del));
+    //    }
+    //}
 
-    public void SetPlayerHeightMultiplier(float multiplier, float affectedTime, bool hasTimer)
-    {
-        beforeScale = transform.localScale;
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
+    //public void SetPlayerHeightMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    //{
+    //    beforeScale = transform.localScale;
+    //    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
 
-        if (hasTimer)
-        {
-            EndPickupDelegate del = ResetPlayerSize;
-            StartCoroutine(PickupTimer(affectedTime, del));
-        }
-    }
+    //    if (hasTimer)
+    //    {
+    //        EndPickupDelegate del = ResetPlayerSize;
+    //        StartCoroutine(PickupTimer(affectedTime, del));
+    //    }
+    //}
 
     public void SetPlayerSizeMultiplier(float multiplier, float affectedTime, bool hasTimer)
     {
+        if (!haveSizeIncrease)
+        {
+        haveSizeIncrease = true;
         beforeScale = transform.localScale;
         transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y * multiplier, transform.localScale.z);
 
         if (hasTimer)
         {
-            EndPickupDelegate del = ResetPlayerSize;
+            EndPickupDelegate del = EndPlayerSizePickup;
             StartCoroutine(PickupTimer(affectedTime, del));
+        }
         }
     }
 
     private void EndPlayerSizePickup()
     {
+        haveSizeIncrease = false;
         transform.localScale = beforeScale;
     }
 
