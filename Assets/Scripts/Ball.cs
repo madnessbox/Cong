@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public float ballSpeedIncrease = 0.2f;
     public GameManager gm;
     public bool rotateTowardsVelocity;
-
+    public bool testing = true;
     public Player latestBouncedPlayer { get; private set; }
     
     private float ballSpeedDelta = 0;
@@ -45,9 +45,15 @@ public class Ball : MonoBehaviour
 
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
+            
             if (isMultiball)
             {
                 Destroy(this.gameObject);
+            }
+            if (testing)
+            {
+                Destroy(this.gameObject);
+                gm.SpawnBall(false);
             }
 
         }
