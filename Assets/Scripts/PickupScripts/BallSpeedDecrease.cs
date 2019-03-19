@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallSpeedChange : MonoBehaviour
+public class BallSpeedDecrease : MonoBehaviour
 {
     public float SpeedMultiplier = 0.8f;
     public float spinSpeed = 2;

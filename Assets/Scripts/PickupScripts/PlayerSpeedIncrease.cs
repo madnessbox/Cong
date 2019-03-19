@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpeedBoostScript : MonoBehaviour
+public class PlayerSpeedIncrease : MonoBehaviour
 {
     private float spinSpeed = 5;
 

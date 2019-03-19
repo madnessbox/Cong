@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSizeChange : MonoBehaviour
+public class PlayerSizeIncrease : MonoBehaviour
 {
 
     public float playerSizeMultiplier = 2;
