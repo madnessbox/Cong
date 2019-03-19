@@ -8,23 +8,23 @@ public class BallSpeedDecrease : MonoBehaviour
     public float spinSpeed = 2;
     public bool isSpeedIncreasing = true;
 
-    private SpriteRenderer sr;
+    //private SpriteRenderer sr;
 
     private void Start()
     {
 
-        sr = GetComponentInParent<SpriteRenderer>();
+        //sr = GetComponentInParent<SpriteRenderer>();
 
         //Randomly determine if its increasing or decreasing mehehe
-        if (Random.value >= 0.5)
-        {
-            isSpeedIncreasing = false;
-            sr.color = Color.green;
-        }else
-        {
-            isSpeedIncreasing = true;
-            sr.color = Color.red;
-        }
+        //if (Random.value >= 0.5)
+        //{
+        //    isSpeedIncreasing = false;
+        //    sr.color = Color.green;
+        //}else
+        //{
+        //    isSpeedIncreasing = true;
+        //    sr.color = Color.red;
+        //}
     }
 
     void Update()
