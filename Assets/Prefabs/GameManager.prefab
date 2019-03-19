@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683799943436284764}
   - component: {fileID: 4683799943436284767}
+  - component: {fileID: 4683799943391158600}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,14 +46,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   speedChanger: {fileID: 0}
+  ballPrefab: {fileID: 0}
   scoreText: {fileID: 0}
   speedMultiplierText: {fileID: 0}
+  playerObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   itemSpawnSettings:
-  - itemPrefab: {fileID: 0}
+  - itemPrefab: {fileID: 5423797104720720598, guid: 27d3c1cea26587845a8c258ac1588dbc,
+      type: 3}
     spawnAfterScore: 0
-    spawnInterval: 0
+    spawnInterval: 15
     spawnScoreInterval: 0
-  - itemPrefab: {fileID: 0}
+  - itemPrefab: {fileID: 6189993097466324391, guid: 1c0f6c24d0371f14b90b674f9c4591fa,
+      type: 3}
     spawnAfterScore: 0
-    spawnInterval: 0
+    spawnInterval: 30
     spawnScoreInterval: 0
+  - itemPrefab: {fileID: 2067065993895973711, guid: da04d72e80b69224f8ef9711228ed5d2,
+      type: 3}
+    spawnAfterScore: 0
+    spawnInterval: 20
+    spawnScoreInterval: 0
+  - itemPrefab: {fileID: 7072360302527650025, guid: b9d79c431e3898f478d8bae13ee741ca,
+      type: 3}
+    spawnAfterScore: 0
+    spawnInterval: 15
+    spawnScoreInterval: 0
+--- !u!114 &4683799943391158600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683799943436284766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7629ef981fc9ab142af6cdfbffbd8a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 0}
+  optionsValuesUI: {fileID: 0}

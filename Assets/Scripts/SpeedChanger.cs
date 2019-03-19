@@ -6,6 +6,8 @@ public class SpeedChanger : MonoBehaviour
 {
     public float SpeedMultiplier = 0.8f;
     public float spinSpeed = 2;
+    public PlayerSize Size;
+    public Player playerObject;
 
     void Update()
     {
@@ -16,6 +18,8 @@ public class SpeedChanger : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
+            playerObject.GetComponent<Player>().SetPlayerSizeMultiplier(10f);
+            
             collision.GetComponentInParent<Ball>().MultiplyVelocity(SpeedMultiplier);
             Destroy(this.gameObject);
         }

@@ -7,9 +7,16 @@ public class Ball : MonoBehaviour
     public float ballSpeed;
     public float ballSpeedIncrease = 0.2f;
     public GameManager gm;
+    public bool rotateTowardsVelocity;
 
+    public Player latestBouncedPlayer { get; private set; }
+    
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
+    private bool isMultiball = false;
+
+    private float currentTime = 0f;
+    private float currentBps = 0;
 
     public Rigidbody2D rb;
     private TrailRenderer tr;
@@ -26,20 +33,28 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
+        if (rotateTowardsVelocity)
+        {
+            Vector3 velDirection = rb.velocity.normalized;
+            float angle = Mathf.Atan2(velDirection.y, velDirection.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.AngleAxis(angle - 90, transform.forward);
+
+            Debug.DrawLine(transform.position, transform.position + velDirection * 5);
+        }
+
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
-            tr.enabled = false;
-            tr.Clear();
-            rb.velocity = Vector2.zero;
-            transform.position = Vector3.zero;
-            Launch();
-            tr.enabled = true;
+            if (isMultiball)
+            {
+                Destroy(this.gameObject);
+            }
+
         }
     }
 
     void Launch()
     {
-        gm.ResetScoreAndSpeedMultiplier();
         ballSpeedDelta = 0;
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         rb.velocity = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * ballSpeed;
@@ -50,8 +65,19 @@ public class Ball : MonoBehaviour
         rb.velocity *= 1 + ballSpeedIncrease;
         ballSpeedDelta += ballSpeedIncrease;
 
+        if (collision.gameObject.GetComponent<Player>() != null)
+        {
+            latestBouncedPlayer = collision.gameObject.GetComponent<Player>();
+            print(latestBouncedPlayer);
+        }
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
+        gm.IncreaseBps(1);
+    }
+
+    public void SetBps()
+    {
+        gm.SetBpsMultiplierText();
     }
 
     public void SetVelocity(Vector2 newVelocity)
@@ -73,5 +99,10 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero;
         ballSpeedDelta = 1;
         gm.SetSpeedMultiplierText(1);
+    }
+
+    public void setMultiball(bool value)
+    {
+        isMultiball = value;
     }
 }

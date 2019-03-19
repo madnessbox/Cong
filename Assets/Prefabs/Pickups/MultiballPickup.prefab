@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6189993097466324385}
   - component: {fileID: 6189993097466324390}
   - component: {fileID: 6189993097466324386}
-  - component: {fileID: 6189993097466324384}
+  - component: {fileID: 7850252745368802243}
   m_Layer: 0
-  m_Name: Pickup_Multiball
-  m_TagString: Untagged
+  m_Name: MultiballPickup
+  m_TagString: Multiball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 73ff2dde341eca74293664f56096b7b9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.97088087, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6189993097466324384
+--- !u!114 &7850252745368802243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,8 +116,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6189993097466324391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f2c319baa0ce34288cf00844bf3249, type: 3}
+  m_Script: {fileID: 11500000, guid: 763ca847420d6824d952436a1468a39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: 0.8
   spinSpeed: 5
+  ball: {fileID: 4247790147616847620, guid: b3b6c97e4875aeb40828e71504d6054e, type: 3}
+  gm: {fileID: 0}
