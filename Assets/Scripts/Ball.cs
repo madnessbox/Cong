@@ -92,7 +92,6 @@ public class Ball : MonoBehaviour
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);
         gm.IncreaseBps(1);
-        gm.AnimatePortrait(latestBouncedPlayer);
     }
 
     public void SetBps()

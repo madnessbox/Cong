@@ -201,9 +201,4 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(timeAffected);
         method();
     }
-
-    public float getPlayerIndex()
-    {
-        return playerIndex;
-    }
 }
