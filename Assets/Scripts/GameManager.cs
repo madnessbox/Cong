@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         // gör radical om bps <= 2 och sedan sätter RadicalCheckerFalse så det bara händer en gång
         if ((scoreMultiplier >= 2f)&&(RadicalChecker))
         {
-            Radical()
+            Radical();
             RadicalChecker = false;
         }
 
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
             perBounceOnRadical++;
             if (perBounceOnRadical == 5)
             {
-                Radical()
+                Radical();
                 perBounceOnRadical = 0;
             }
                 
