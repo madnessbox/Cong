@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Animator[] playerPortraits;
 
+    [SerializeField]
+    private GameObject[] onScreenPopups;
+
     [System.Serializable]
     struct SpawnSetting
     {
@@ -214,11 +217,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //When you want to trigger individual portrait animation, send the player this way!
     public void AnimatePortrait(Player playerIdentifier)
     {
-        switch (playerIdentifier.getPlayerIndex()) {
+        switch (playerIdentifier.getPlayerIndex())
+        {
             case 0:
-                playerPortraits[0].Play("BlueAnim"); 
+                playerPortraits[0].Play("BlueAnim");
                 break;
             case 1:
                 playerPortraits[1].Play("GreenAnim");
@@ -229,8 +234,24 @@ public class GameManager : MonoBehaviour
             case 3:
                 playerPortraits[3].Play("YellowAnim");
                 break;
+            default:
+                Debug.Log("playerIdentifier invalid");
+                break;
         }
-        
+
+    }
+
+    //When you want to trigger popup text, feed this function a value between 0-3 [0 = Radical || 1 = Freaky || 2 = Gnarly || 3 = Tubular]
+    public void TriggerPopupText(int value)
+    {
+        StartCoroutine(StartPopupTimer(onScreenPopups[value], 2));
+    }
+
+    IEnumerator StartPopupTimer(GameObject textObject, float delay)
+    {
+        textObject.GetComponent<SpriteRenderer>().enabled = true;
+        yield return new WaitForSeconds(delay);
+        textObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
 }
