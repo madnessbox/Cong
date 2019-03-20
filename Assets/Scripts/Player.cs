@@ -48,6 +48,9 @@ public class Player : MonoBehaviour
             case 3:
                 angle = 3 * (Mathf.PI / 2);
                 break;
+            default:
+                Debug.Log("Invalid input");
+                break;
         }
     }
 
