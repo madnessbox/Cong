@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     private int bps = 0;
     private float currentTime = 0;
     private float scoreMultiplier = 1;
-    private bool isRadical = false;
-    private float radicalCounter = 0;
+    private bool RadicalChecker = true;
+    private int perBounceOnRadical = 0;
+  
 
     [Header("Prefabs")]
     [SerializeField]
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
     private SpawnSetting[] itemSpawnSettings;
 
     private List<SpawnSetting> itemsToSpawnAfterScore = new List<SpawnSetting>();
+
+    public int PerBounceOnRadical { get => perBounceOnRadical; set => perBounceOnRadical = value; }
 
     void Start()
     {
@@ -88,17 +91,30 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore(int amount)
     {
 
-        if (isRadical)
+        // gör radical om bps <= 2 och sedan sätter RadicalCheckerFalse så det bara händer en gång
+        if ((scoreMultiplier >= 2f)&&(RadicalChecker))
         {
-            float combo = 0;
-            radicalCounter += 1;
-            if (radicalCounter == combo)
-            {
-                Radical();
-                combo += 5;
-            }
-            
+            Radical()
+            RadicalChecker = false;
         }
+
+        //gör RadicalChecker true om ens bps går för lågt, så att radical kan återaktiveras om man kommer upp till 2 bps igen
+        else if (scoreMultiplier <= 1.8f)
+            RadicalChecker = true;
+
+        //gör radical igen om man behåller bps >= 2 på 5 bounce
+        if (RadicalChecker = false)
+        {
+            perBounceOnRadical++;
+            if (perBounceOnRadical == 5)
+            {
+                Radical()
+                perBounceOnRadical = 0;
+            }
+                
+        }
+        
+
 
         score += (int)(500f * scoreMultiplier);
         scoreText.text = score.ToString();
@@ -141,6 +157,9 @@ public class GameManager : MonoBehaviour
     {
         scoreMultiplier = 1 + (bps / Time.time);
         bpsText.text = (scoreMultiplier).ToString("0.0");
+
+       
+        
     }
 
     public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)

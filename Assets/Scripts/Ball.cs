@@ -35,15 +35,15 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        
 
-        if ((ballSpeedDelta) >= 0.5f && (radical == false))
+        
+        /*if ((ballSpeedDelta) >= 0.5f && (radical == false))
         {
             radical = true;
             gm.Radical();
 
         }
-
+*/
 
 
         if (rotateTowardsVelocity)
