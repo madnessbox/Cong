@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] playerObjects;
 
+    [SerializeField]
+    private Animator[] playerPortraits;
+
     [System.Serializable]
     struct SpawnSetting
     {
@@ -192,8 +195,23 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
-
+    public void AnimatePortrait(Player playerIdentifier)
+    {
+        switch (playerIdentifier.getPlayerIndex()) {
+            case 0:
+                playerPortraits[0].Play("BlueAnim"); 
+                break;
+            case 1:
+                playerPortraits[1].Play("GreenAnim");
+                break;
+            case 2:
+                playerPortraits[2].Play("RedAnim");
+                break;
+            case 3:
+                playerPortraits[3].Play("YellowAnim");
+                break;
+        }
+        
+    }
 
 }
