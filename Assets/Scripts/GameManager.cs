@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     private float scoreMultiplier = 1;
     private bool RadicalChecker = true;
     private int perBounceOnRadical = 0;
-  
+    public GameObject CountDownImage;
+    public GameObject PressSpaceToStart;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -58,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+       CountDownImage.SetActive(false);
+
         if (PlayerPrefs.HasKey("Is4Player"))
         {
             if (PlayerPrefs.GetInt("Is4Player") == 1)
@@ -66,22 +69,38 @@ public class GameManager : MonoBehaviour
                 playerObjects[3].SetActive(true);
             }
         }
-        
-        foreach (SpawnSetting toSpawn in itemSpawnSettings)
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
         {
-            if (toSpawn.spawnAfterScore == false && 
+            PressSpaceToStart.SetActive(false);
+            CountDownImage.SetActive(true);           
+        }
+    }
+
+
+
+    public void GameStart()
+    {
+        Debug.Log("startGame");
+           foreach (SpawnSetting toSpawn in itemSpawnSettings)
+            {
+                 if (toSpawn.spawnAfterScore == false && 
                 toSpawn.itemPrefab != null && 
                 toSpawn.spawnInterval > 1)
-            {
+                  {
                 StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
-            }
-            else if (toSpawn.spawnAfterScore)
-            {
-                itemsToSpawnAfterScore.Add(toSpawn);
-            }
-        }
+                  }
+                else if (toSpawn.spawnAfterScore)
+                {
+                 itemsToSpawnAfterScore.Add(toSpawn);
+                }
+          }
 
-        SpawnBall(false);
+         SpawnBall(false);
+        
     }
 
     private void FixedUpdate()
