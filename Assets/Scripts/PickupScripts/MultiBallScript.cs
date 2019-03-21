@@ -14,23 +14,21 @@ public class MultiBallScript : MonoBehaviour
     }
 
     
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
             if (Random.Range(0, 3) == 1)
             {
-                gm.SpawnBall(true);
-                gm.SpawnBall(true);
-                gm.SpawnBall(true);
-                gm.SpawnBall(true);
-                Debug.Log("4x MULTIBALL!!");
+                gm.SpawnBall();
+                gm.SpawnBall();
+                gm.SpawnBall();
+                gm.SpawnBall();
             }
             else
             {
-                gm.SpawnBall(true);
-                gm.SpawnBall(true);
-                Debug.Log("2x MULTIBALL!!"); 
+                gm.SpawnBall();
+                gm.SpawnBall();
             }
             
             Destroy(this.gameObject);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
+
 
     [Header("Settings")]
     [SerializeField]
@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int playerIndex = 0;
+    public int GetPlayerIndex() { return playerIndex; }
 
     [Header("Stats")]
     [SerializeField]
@@ -49,7 +50,7 @@ public class Player : MonoBehaviour
                 angle = 3 * (Mathf.PI / 2);
                 break;
             default:
-                Debug.Log("Invalid input");
+                Debug.Log("Invalid Player index");
                 break;
         }
     }
@@ -71,9 +72,6 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-
-
-
         if ((playerIndex == 0 && Input.GetAxisRaw("Player1Horizontal") > 0) ||
             (playerIndex == 1 && Input.GetAxisRaw("Player2Horizontal") > 0) ||
             (playerIndex == 2 && Input.GetAxisRaw("Player3Horizontal") > 0) ||
@@ -96,35 +94,34 @@ public class Player : MonoBehaviour
         Vector3 temp = new Vector3(newX, newY, 0);
 
         transform.position = temp;
-
     }
 
-    //CODE NOT BEING USED:
-    //public void SetPlayerWidthMultiplier(float multiplier, float affectedTime, bool hasTimer)
-    //{
-    //    beforeScale = transform.localScale;
-    //    transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
+  
+    public void SetPlayerWidthMultiplier(float multiplier, bool hasTimer = true, float affectedTime = 2)
+    {
+        beforeScale = transform.localScale;
+        transform.localScale = new Vector3(transform.localScale.x * multiplier, transform.localScale.y, transform.localScale.z);
 
-    //    if (hasTimer)
-    //    {
-    //        EndPickupDelegate del = ResetPlayerSize;
-    //        StartCoroutine(PickupTimer(affectedTime, del));
-    //    }
-    //}
+        if (hasTimer)
+        {
+            EndPickupDelegate del = ResetPlayerSize;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
+    }
 
-    //public void SetPlayerHeightMultiplier(float multiplier, float affectedTime, bool hasTimer)
-    //{
-    //    beforeScale = transform.localScale;
-    //    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
+    public void SetPlayerHeightMultiplier(float multiplier, bool hasTimer = true, float affectedTime = 2)
+    {
+        beforeScale = transform.localScale;
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * multiplier, transform.localScale.z);
 
-    //    if (hasTimer)
-    //    {
-    //        EndPickupDelegate del = ResetPlayerSize;
-    //        StartCoroutine(PickupTimer(affectedTime, del));
-    //    }
-    //}
+        if (hasTimer)
+        {
+            EndPickupDelegate del = ResetPlayerSize;
+            StartCoroutine(PickupTimer(affectedTime, del));
+        }
+    }
 
-    public void SetPlayerSizeMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerSizeMultiplier(float multiplier, bool hasTimer = true, float affectedTime = 2)
     {
         if (!haveSizeIncrease)
         {
@@ -153,7 +150,7 @@ public class Player : MonoBehaviour
 
 
 
-    public void SetPlayerSpeedMultiplier(float multiplier, float affectedTime, bool hasTimer)
+    public void SetPlayerSpeedMultiplier(float multiplier, bool hasTimer = true, float affectedTime = 2)
     {
         beforeMoveSpeed = moveSpeed;
         moveSpeed *= multiplier;
@@ -165,7 +162,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetPlayerSpeed(float newSpeed, float affectedTime, bool hasTimer)
+    public void SetPlayerSpeed(float newSpeed, bool hasTimer = true, float affectedTime = 2)
     {
         beforeMoveSpeed = moveSpeed;
         moveSpeed = newSpeed;
@@ -203,10 +200,5 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(timeAffected);
         method();
-    }
-
-    public float getPlayerIndex()
-    {
-        return playerIndex;
     }
 }

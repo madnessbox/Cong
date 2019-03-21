@@ -8,12 +8,18 @@ public class GameManager : MonoBehaviour
     [Header("Statistics")]
     [SerializeField]
     private int score = 0;
-    private int bps = 0;
+
+    [SerializeField]
+    private int[] scoreMilestones;
+
+    private int milestonesReached = 0;
+
+    private int bounces = 0;
     private float currentTime = 0;
     private float scoreMultiplier = 1;
-    private bool RadicalChecker = true;
-    private int perBounceOnRadical = 0;
-  
+    private int lastTextShowIndex = 0;
+    private int balls = 0;
+
 
     [Header("Prefabs")]
     [SerializeField]
@@ -23,10 +29,13 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
+    private HighScores highScoreManager;
+
+    [SerializeField]
     private Text scoreText;
 
     [SerializeField]
-    private Text bpsText;
+    private Text bouncesText;
 
     [SerializeField]
     private Text speedMultiplierText;
@@ -36,6 +45,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Animator[] playerPortraits;
+
+    [SerializeField]
+    private Animator[] textAnimators;
 
     [SerializeField]
     private GameObject[] onScreenPopups;
@@ -54,7 +66,6 @@ public class GameManager : MonoBehaviour
 
     private List<SpawnSetting> itemsToSpawnAfterScore = new List<SpawnSetting>();
 
-    public int PerBounceOnRadical { get => perBounceOnRadical; set => perBounceOnRadical = value; }
 
     void Start()
     {
@@ -66,11 +77,11 @@ public class GameManager : MonoBehaviour
                 playerObjects[3].SetActive(true);
             }
         }
-        
+
         foreach (SpawnSetting toSpawn in itemSpawnSettings)
         {
-            if (toSpawn.spawnAfterScore == false && 
-                toSpawn.itemPrefab != null && 
+            if (toSpawn.spawnAfterScore == false &&
+                toSpawn.itemPrefab != null &&
                 toSpawn.spawnInterval > 1)
             {
                 StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
@@ -81,7 +92,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        SpawnBall(false);
+        SpawnBall();
     }
 
     private void FixedUpdate()
@@ -91,39 +102,44 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseBps(int amount)
     {
-        bps += amount;
+        bounces += amount;
     }
 
     public void IncreaseScore(int amount)
     {
-
-        // gör radical om bps <= 2 och sedan sätter RadicalCheckerFalse så det bara händer en gång
-        if ((scoreMultiplier >= 2f)&&(RadicalChecker))
-        {
-            Radical();
-            RadicalChecker = false;
-        }
-
-        //gör RadicalChecker true om ens bps går för lågt, så att radical kan återaktiveras om man kommer upp till 2 bps igen
-        else if (scoreMultiplier <= 1.8f)
-            RadicalChecker = true;
-
-        //gör radical igen om man behåller bps >= 2 på 5 bounce
-        if (RadicalChecker = false)
-        {
-            perBounceOnRadical++;
-            if (perBounceOnRadical == 5)
-            {
-                Radical();
-                perBounceOnRadical = 0;
-            }
-                
-        }
-        
-
-
         score += (int)(500f * scoreMultiplier);
         scoreText.text = score.ToString();
+
+        if (milestonesReached < scoreMilestones.Length)
+        {
+            if (score >= scoreMilestones[milestonesReached])
+            {
+                milestonesReached++;
+
+                int nextTextIndex = 0;
+                do
+                {
+                    nextTextIndex = Random.Range(0, 5);
+                } while (nextTextIndex != lastTextShowIndex);
+
+                switch (nextTextIndex)
+                {
+                    case 0:
+                        TriggerPopupText(textAnimators[0]);
+                        break;
+                    case 1:
+                        TriggerPopupText(textAnimators[1]);
+                        break;
+                    case 2:
+                        TriggerPopupText(textAnimators[2]);
+                        break;
+                    case 3:
+                        TriggerPopupText(textAnimators[3]);
+                        break;
+
+                }
+            }
+        }
 
         foreach (SpawnSetting toSpawn in itemsToSpawnAfterScore)
         {
@@ -161,11 +177,8 @@ public class GameManager : MonoBehaviour
 
     public void SetBpsMultiplierText()
     {
-        scoreMultiplier = 1 + (bps / Time.time);
-        bpsText.text = (scoreMultiplier).ToString("0.0");
-
-       
-        
+        scoreMultiplier = 1 + (bounces / Time.time);
+        bouncesText.text = (scoreMultiplier).ToString("0.0");
     }
 
     public void SpawnPickup(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -185,10 +198,6 @@ public class GameManager : MonoBehaviour
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
-        //if (pickupToSpawn.tag == "Multiball")
-        //{
-        //    spawnedPickup.GetComponent<MultiBallScript>().gm = this;
-        //}
     }
 
     IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -197,30 +206,16 @@ public class GameManager : MonoBehaviour
         SpawnPickup(pickupToSpawn, timeBetweenSpawns);
     }
 
-
-    public void SpawnBall(bool multiball)
+    public void SpawnBall()
     {
         Ball ballTemp = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity)?.GetComponent<Ball>();
         ballTemp.gm = this;
-        if (multiball)
-        {
-            ballTemp.isMultiball = true;
-        }
+        balls++;
     }
 
-
-    //call radical when ballSpeedDelta is over .5
-    public void Radical()
-    {
-
-        Debug.Log("radical!");
-
-    }
-
-    //When you want to trigger individual portrait animation, send the player this way!
     public void AnimatePortrait(Player playerIdentifier)
     {
-        switch (playerIdentifier.getPlayerIndex())
+        switch (playerIdentifier.GetPlayerIndex())
         {
             case 0:
                 playerPortraits[0].Play("BlueAnim");
@@ -238,20 +233,36 @@ public class GameManager : MonoBehaviour
                 Debug.Log("playerIdentifier invalid");
                 break;
         }
-
     }
 
-    //When you want to trigger popup text, feed this function a value between 0-3 [0 = Radical || 1 = Freaky || 2 = Gnarly || 3 = Tubular]
-    public void TriggerPopupText(int value)
+    public void TriggerPopupText(Animator animator)
     {
-        StartCoroutine(StartPopupTimer(onScreenPopups[value], 2));
+        animator.SetTrigger("PlayAnim");
+        foreach (Animator anim in playerPortraits)
+        {
+            anim.SetTrigger("PlayAnim");
+        }
     }
 
-    IEnumerator StartPopupTimer(GameObject textObject, float delay)
+    public void DecreaseBallsActive()
     {
-        textObject.GetComponent<SpriteRenderer>().enabled = true;
-        yield return new WaitForSeconds(delay);
-        textObject.GetComponent<SpriteRenderer>().enabled = false;
+        balls--;
+        if (balls <= 0)
+        {
+            Lost();
+        }
     }
 
+    public void StartGame()
+    {
+
+    }
+
+    public void Lost()
+    {
+        highScoreManager.SubmitScore(score);
+
+
+        score = 0;
+    }
 }

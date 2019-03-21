@@ -10,14 +10,25 @@ public class HighScores : MonoBehaviour
 
     private int[] topScores = new int[5];
 
+    [ContextMenu("Delete all scores")]
+    void ResetScores()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        PlayerPrefs.DeleteKey("Score1");
+        PlayerPrefs.DeleteKey("Score2");
+        PlayerPrefs.DeleteKey("Score3");
+        PlayerPrefs.DeleteKey("Score4");
+    }
+
     void Start()
     {
+        GetScores();
         PrintScoresToUI();
     }
 
     void GetScores()
     {
-        if(PlayerPrefs.HasKey("HighScore"))
+        if (PlayerPrefs.HasKey("HighScore"))
         {
             topScores[0] = PlayerPrefs.GetInt("HighScore");
         }
@@ -30,6 +41,18 @@ public class HighScores : MonoBehaviour
             }
         }
 
+    }
+
+    void SaveScores()
+    {
+        PlayerPrefs.SetInt("HighScore", topScores[0]);
+
+        for (int i = 1; i < 5; i++)
+        {
+            PlayerPrefs.SetInt("Score" + i, topScores[i]);
+        }
+
+        PlayerPrefs.Save();
     }
 
     void PrintScoresToUI()
@@ -49,12 +72,22 @@ public class HighScores : MonoBehaviour
 
     public void SubmitScore(int score)
     {
-        for (int i = topScores.Length - 1; i >= 0; i--)
+        for (int i = 0; i < topScores.Length; i++)
         {
             if (score > topScores[i])
             {
+                for (int j = HighScoresTexts.Length - 1; j >= i; j--)
+                {
+                    if (j - 1 >= 0)
+                    {
+                        topScores[j] = topScores[j - 1];
+                    }
+                }
+
                 topScores[i] = score;
-                HighScoresTexts[i].text = score.ToString();
+
+                PrintScoresToUI();
+                SaveScores();
                 return;
             }
         }

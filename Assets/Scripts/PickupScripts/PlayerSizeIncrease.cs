@@ -19,7 +19,7 @@ public class PlayerSizeIncrease : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
-            collision.GetComponentInParent<Ball>().latestBouncedPlayer?.SetPlayerSizeMultiplier(playerSizeMultiplier, duration, hasTimer);
+            collision.GetComponentInParent<Ball>().latestBouncedPlayer?.SetPlayerSizeMultiplier(playerSizeMultiplier, hasTimer, duration);
             Destroy(this.gameObject);
         }
     }

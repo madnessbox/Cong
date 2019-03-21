@@ -8,12 +8,10 @@ public class Ball : MonoBehaviour
     public float ballSpeedIncrease = 0.2f;
     public GameManager gm;
     public bool rotateTowardsVelocity;
-    public bool testing = true;
     public Player latestBouncedPlayer { get; private set; }
     
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
-    public bool isMultiball = false;
 
     private float currentTime = 0f;
     private float currentBps = 0;
@@ -21,9 +19,6 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb;
     private TrailRenderer tr;
 
-    public bool radical = false;
-
-    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,17 +30,6 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-
-        
-        /*if ((ballSpeedDelta) >= 0.5f && (radical == false))
-        {
-            radical = true;
-            gm.Radical();
-
-        }
-*/
-
-
         if (rotateTowardsVelocity)
         {
             Vector3 velDirection = rb.velocity.normalized;
@@ -58,20 +42,11 @@ public class Ball : MonoBehaviour
 
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
-            
-            if (isMultiball)
-            {
-                Destroy(this.gameObject);
-            }
-            if (testing && !isMultiball)
-            {
-                Destroy(this.gameObject);
-                gm.SpawnBall(false);
-            }
+            gm.DecreaseBallsActive();
+            Destroy(this.gameObject);
 
         }
     }
-
 
     void Launch()
     {
