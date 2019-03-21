@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     private SpawnSetting[] itemSpawnSettings;
 
     private List<SpawnSetting> itemsToSpawnAfterScore = new List<SpawnSetting>();
-
+    private List<GameObject> spawnedPickups = new List<GameObject>();
 
     void Start()
     {
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             if (toSpawn.spawnAfterScore == false &&
                 toSpawn.itemPrefab != null &&
                 toSpawn.spawnInterval > 1)
-                  {
+            {
                 StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
             }
             else if (toSpawn.spawnAfterScore)
@@ -191,10 +191,14 @@ public class GameManager : MonoBehaviour
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
-        if (pickupToSpawn.tag == "Multiball")
+        if (spawnedPickup.GetComponent<MultiBallScript>())
         {
             spawnedPickup.GetComponent<MultiBallScript>().gm = this;
         }
+
+
+        spawnedPickups.Add(spawnedPickup);
+
         StartCoroutine(StartPickupTimer(pickupToSpawn, timeBetweenSpawns));
     }
 
@@ -203,6 +207,7 @@ public class GameManager : MonoBehaviour
         float randomAngle = Random.Range(0f, Mathf.PI * 2);
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
+        spawnedPickups.Add(spawnedPickup);
     }
 
     IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -267,6 +272,13 @@ public class GameManager : MonoBehaviour
 
         scoreText.text = score.ToString();
         bouncesText.text = (scoreMultiplier).ToString("0.0");
+
+        foreach (GameObject pickup in spawnedPickups)
+        {
+            Destroy(pickup);
+        }
+
+        spawnedPickups.Clear();
 
         SpawnBall();
     }
