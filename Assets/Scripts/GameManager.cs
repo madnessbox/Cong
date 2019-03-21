@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+       CountDownImage.SetActive(false);
+
         if (PlayerPrefs.HasKey("Is4Player"))
         {
             if (PlayerPrefs.GetInt("Is4Player") == 1)
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
             if (toSpawn.spawnAfterScore == false &&
                 toSpawn.itemPrefab != null &&
                 toSpawn.spawnInterval > 1)
-            {
+                  {
                 StartCoroutine(StartPickupTimer(toSpawn.itemPrefab, toSpawn.spawnInterval));
             }
             else if (toSpawn.spawnAfterScore)
