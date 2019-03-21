@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private HighScores highScoreManager;
 
+    //[SerializeField]
+    //private GameObject countDownImage;
+
+    [SerializeField]
+    private GameObject pressSpaceToStartObject;
+
     [SerializeField]
     private Text scoreText;
 
@@ -69,7 +75,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-       CountDownImage.SetActive(false);
 
         if (PlayerPrefs.HasKey("Is4Player"))
         {
@@ -93,11 +98,9 @@ public class GameManager : MonoBehaviour
                 itemsToSpawnAfterScore.Add(toSpawn);
             }
         }
-
-        SpawnBall();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         SetBpsMultiplierText();
     }
@@ -257,14 +260,24 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        score = 0;
+        balls = 0;
+        scoreMultiplier = 1;
+        milestonesReached = 0;
 
+        scoreText.text = score.ToString();
+        bouncesText.text = (scoreMultiplier).ToString("0.0");
+
+        SpawnBall();
     }
 
     public void Lost()
     {
-        highScoreManager.SubmitScore(score);
+        if (score > 0)
+        {
+            highScoreManager.SubmitScore(score);
+        }
 
-
-        score = 0;
+        pressSpaceToStartObject.SetActive(true);
     }
 }

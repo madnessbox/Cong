@@ -21,7 +21,7 @@ public class PlayerSpeedDecrease : MonoBehaviour
     {
         if (collision.GetComponentInParent<Ball>() != null)
         {
-            collision.GetComponentInParent<Ball>().latestBouncedPlayer.SetPlayerSpeedMultiplier(newSpeed, duration, hasTimer);
+            collision.GetComponentInParent<Ball>().latestBouncedPlayer.SetPlayerSpeedMultiplier(newSpeed, hasTimer, duration);
             Debug.Log("Player BOOST!!");
             Destroy(gameObject);
         }

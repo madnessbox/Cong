@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5423797104720720599}
   - component: {fileID: 5423797104720720593}
   - component: {fileID: 959405536596291682}
+  - component: {fileID: 6721668836217062323}
   m_Layer: 0
   m_Name: BallSpeedDecreasePickup
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bf476e2e59c0d6e4c97ce72590161685, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd5d165fdee2a404dbe6a9dd9494c672, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMultiplier: 0.9
-  spinSpeed: 5
+  spinSpeed: 0
   isSpeedIncreasing: 1
 --- !u!58 &959405536596291682
 CircleCollider2D:
@@ -112,3 +113,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &6721668836217062323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423797104720720598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3072e9104288eaa46ad6b9455a510c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeSpeed: 0.2
+  shakeAmount: 2
+  euler: {x: 0, y: 0, z: 0}
+  maxRotation: 8
+  speed: 1
