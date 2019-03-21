@@ -9,20 +9,27 @@ public class Ball : MonoBehaviour
     public GameManager gm;
     public bool rotateTowardsVelocity;
     public Player latestBouncedPlayer { get; private set; }
-    
+
+    [SerializeField]
+    private Sprite[] ballSprites;
+
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
 
     private float currentTime = 0f;
     private float currentBps = 0;
 
+    private int bounces = 0;
+
     public Rigidbody2D rb;
     private TrailRenderer tr;
+    private SpriteRenderer sr;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         initBallSpeed = ballSpeed;
 
         Launch();
@@ -57,6 +64,17 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        bounces++;
+
+        if (bounces % 4 == 0)
+        {
+            if (bounces / 4 < ballSprites.Length)
+            {
+                sr.sprite = ballSprites[bounces / 4];
+            }
+        }
+        
+
         rb.velocity *= 1 + ballSpeedIncrease;
         ballSpeedDelta += ballSpeedIncrease;
 

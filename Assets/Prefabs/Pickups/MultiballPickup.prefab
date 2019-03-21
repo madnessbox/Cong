@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6189993097466324390}
   - component: {fileID: 7850252745368802243}
   - component: {fileID: 8159889594105407329}
+  - component: {fileID: 7212118776428833777}
   m_Layer: 0
   m_Name: MultiballPickup
   m_TagString: Multiball
@@ -111,3 +112,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &7212118776428833777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189993097466324391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3072e9104288eaa46ad6b9455a510c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeSpeed: 0.2
+  shakeAmount: 2
+  euler: {x: 0, y: 0, z: 0}
+  maxRotation: 8
+  speed: 1

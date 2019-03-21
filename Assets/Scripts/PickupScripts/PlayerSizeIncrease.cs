@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class PlayerSizeIncrease : MonoBehaviour
 {
-
     public float playerSizeMultiplier = 2;
     public float duration = 15;
     public bool hasTimer = true;
-    private float spinSpeed = 5;
-
-    void Update()
-    {
-        transform.Rotate(Vector3.forward, spinSpeed);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,5 +16,4 @@ public class PlayerSizeIncrease : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class MultiBallScript : MonoBehaviour
 {
-    private float spinSpeed = 5;
     public GameObject ball;
     public GameManager gm;
 
-    void Update()
-    {
-        transform.Rotate(Vector3.forward, spinSpeed);
-    }
-
-    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponentInParent<Ball>() != null)

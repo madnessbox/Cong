@@ -75,13 +75,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
         if (PlayerPrefs.HasKey("Is4Player"))
         {
             if (PlayerPrefs.GetInt("Is4Player") == 1)
             {
                 playerObjects[2].SetActive(true);
                 playerObjects[3].SetActive(true);
+
+                playerPortraits[2].GetComponentInParent<SpriteRenderer>().enabled = true;
+                playerPortraits[3].GetComponentInParent<SpriteRenderer>().enabled = true;
             }
         }
 
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
                 do
                 {
                     nextTextIndex = Random.Range(0, 5);
-                } while (nextTextIndex != lastTextShowIndex);
+                } while (nextTextIndex == lastTextShowIndex);
 
                 switch (nextTextIndex)
                 {
@@ -273,14 +275,19 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
         bouncesText.text = (scoreMultiplier).ToString("0.0");
 
+        
+
+        SpawnBall();
+    }
+
+    public void ClearPickups()
+    {
         foreach (GameObject pickup in spawnedPickups)
         {
             Destroy(pickup);
         }
 
         spawnedPickups.Clear();
-
-        SpawnBall();
     }
 
     public void Lost()
@@ -289,6 +296,8 @@ public class GameManager : MonoBehaviour
         {
             highScoreManager.SubmitScore(score);
         }
+
+        //ClearPickups();
 
         pressSpaceToStartObject.SetActive(true);
     }
