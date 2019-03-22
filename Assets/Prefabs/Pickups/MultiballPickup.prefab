@@ -96,6 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 4247790147616847620, guid: b3b6c97e4875aeb40828e71504d6054e, type: 3}
   gm: {fileID: 0}
+  clip:
+  - {fileID: 8300000, guid: 42f83207436cc074eb9051a14fb8d915, type: 3}
+  - {fileID: 8300000, guid: c3e971c2f05b81546a77e69d894a0132, type: 3}
+  - {fileID: 8300000, guid: cdf1d01a93269864895ae5fcda4da87c, type: 3}
 --- !u!58 &8159889594105407329
 CircleCollider2D:
   m_ObjectHideFlags: 0

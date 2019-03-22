@@ -95,8 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMultiplier: 0.9
-  spinSpeed: 0
-  isSpeedIncreasing: 1
+  clip: {fileID: 8300000, guid: 42f83207436cc074eb9051a14fb8d915, type: 3}
 --- !u!58 &959405536596291682
 CircleCollider2D:
   m_ObjectHideFlags: 0

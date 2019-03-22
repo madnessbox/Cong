@@ -123,6 +123,10 @@ MonoBehaviour:
   playerSizeMultiplier: 2
   duration: 5
   hasTimer: 1
+  clip:
+  - {fileID: 8300000, guid: c3e971c2f05b81546a77e69d894a0132, type: 3}
+  - {fileID: 8300000, guid: c3e971c2f05b81546a77e69d894a0132, type: 3}
+  - {fileID: 8300000, guid: cdf1d01a93269864895ae5fcda4da87c, type: 3}
 --- !u!114 &3707925065109041960
 MonoBehaviour:
   m_ObjectHideFlags: 0

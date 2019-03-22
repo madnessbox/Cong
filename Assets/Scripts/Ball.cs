@@ -16,14 +16,14 @@ public class Ball : MonoBehaviour
     private float ballSpeedDelta = 0;
     private float initBallSpeed;
 
-    private float currentTime = 0f;
-    private float currentBps = 0;
-
     private int bounces = 0;
 
     public Rigidbody2D rb;
     private TrailRenderer tr;
     private SpriteRenderer sr;
+
+    public AudioClip[] pongSounds;
+    public AudioClip[] humanSounds;
 
     void Start()
     {
@@ -49,6 +49,8 @@ public class Ball : MonoBehaviour
 
         if ((transform.position - Vector3.zero).magnitude > 6f)
         {
+
+            AudioHandler.instance.SoundQueue(AudioHandler.instance.queue02, humanSounds);
             gm.DecreaseBallsActive();
             Destroy(this.gameObject);
 
@@ -81,6 +83,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             latestBouncedPlayer = collision.gameObject.GetComponent<Player>();
+
+            AudioHandler.instance.SoundQueue(AudioHandler.instance.queue01, pongSounds);
         }
         gm.IncreaseScore(1);
         gm.SetSpeedMultiplierText(ballSpeedDelta + 1);

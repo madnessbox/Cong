@@ -12,6 +12,8 @@ public class PlayerSpeedDecrease : MonoBehaviour
     public float duration = 8;
     public bool hasTimer = true;
 
+    public AudioClip[] clip;
+
     void Update()
     {
         transform.Rotate(Vector3.forward, spinSpeed);
@@ -23,6 +25,7 @@ public class PlayerSpeedDecrease : MonoBehaviour
         {
             collision.GetComponentInParent<Ball>().latestBouncedPlayer?.SetPlayerSpeedMultiplier(newSpeed, hasTimer, duration);
 
+            AudioHandler.instance.SoundQueue(AudioHandler.instance.queue04, clip);
             Destroy(gameObject);
         }
     }

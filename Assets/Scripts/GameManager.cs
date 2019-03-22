@@ -15,11 +15,13 @@ public class GameManager : MonoBehaviour
     private int milestonesReached = 0;
 
     private int bounces = 0;
-    private float currentTime = 0;
     private float scoreMultiplier = 1;
     private int lastTextShowIndex = 0;
     private int balls = 0;
 
+    public AudioClip[] announcerClip;
+    public AudioClip[] headSpawnClip;
+    public AudioClip gameLostClip;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -133,15 +135,19 @@ public class GameManager : MonoBehaviour
                 {
                     case 0:
                         TriggerPopupText(textAnimators[0]);
+                        AudioHandler.instance.RandomizeEffects(announcerClip[0]);
                         break;
                     case 1:
                         TriggerPopupText(textAnimators[1]);
+                        AudioHandler.instance.RandomizeEffects(announcerClip[0]);
                         break;
                     case 2:
                         TriggerPopupText(textAnimators[2]);
+                        AudioHandler.instance.RandomizeEffects(announcerClip[1]);
                         break;
                     case 3:
                         TriggerPopupText(textAnimators[3]);
+                        AudioHandler.instance.RandomizeEffects(announcerClip[1]);
                         break;
 
                 }
@@ -210,6 +216,7 @@ public class GameManager : MonoBehaviour
         Vector2 randomPos = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized * Random.Range(0f, 4f);
         GameObject spawnedPickup = Instantiate(pickupToSpawn, randomPos, Quaternion.identity);
         spawnedPickups.Add(spawnedPickup);
+
     }
 
     IEnumerator StartPickupTimer(GameObject pickupToSpawn, float timeBetweenSpawns)
@@ -223,6 +230,8 @@ public class GameManager : MonoBehaviour
         Ball ballTemp = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity)?.GetComponent<Ball>();
         ballTemp.gm = this;
         balls++;
+
+        AudioHandler.instance.SoundQueue(AudioHandler.instance.queue04, headSpawnClip);
     }
 
     public void AnimatePortrait(Player playerIdentifier)
@@ -297,8 +306,8 @@ public class GameManager : MonoBehaviour
             highScoreManager.SubmitScore(score);
         }
 
-        //ClearPickups();
-
+        AudioHandler.instance.SoundQueue(AudioHandler.instance.effectsSource, gameLostClip);
         pressSpaceToStartObject.SetActive(true);
+
     }
 }

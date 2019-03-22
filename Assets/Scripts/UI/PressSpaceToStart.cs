@@ -7,6 +7,8 @@ public class PressSpaceToStart : MonoBehaviour
     public GameObject countDownObject;
     public GameManager gm;
 
+    public AudioClip riser;
+
     void Update()
     {
         if (Input.GetAxisRaw("Submit") > 0)
@@ -14,6 +16,7 @@ public class PressSpaceToStart : MonoBehaviour
             gm.ClearPickups();
             countDownObject.SetActive(true);
             gameObject.SetActive(false);
+            AudioHandler.instance.RandomizeEffects(riser);
         }
     }
 }

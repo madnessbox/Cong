@@ -123,6 +123,10 @@ MonoBehaviour:
   newSpeed: 1.02
   duration: 5
   hasTimer: 1
+  clip:
+  - {fileID: 8300000, guid: 42f83207436cc074eb9051a14fb8d915, type: 3}
+  - {fileID: 8300000, guid: c3e971c2f05b81546a77e69d894a0132, type: 3}
+  - {fileID: 8300000, guid: cdf1d01a93269864895ae5fcda4da87c, type: 3}
 --- !u!114 &4229671543192335444
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class MultiBallScript : MonoBehaviour
     public GameObject ball;
     public GameManager gm;
 
+    public AudioClip[] clip;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponentInParent<Ball>() != null)
@@ -23,7 +25,8 @@ public class MultiBallScript : MonoBehaviour
                 gm.SpawnBall();
                 gm.SpawnBall();
             }
-            
+
+            AudioHandler.instance.SoundQueue(AudioHandler.instance.queue04, clip);
             Destroy(this.gameObject);
         }
     }
