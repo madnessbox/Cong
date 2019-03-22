@@ -1989,12 +1989,12 @@ PrefabInstance:
         type: 3}
       propertyPath: announcerClip.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: f1160aeec1ae4984fb3aabb6d9bf8e18, type: 3}
+      objectReference: {fileID: 8300000, guid: 3c9464826bd94b546b62f2352ede418d, type: 3}
     - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
         type: 3}
       propertyPath: announcerClip.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 38e50cbcc36bb604fae4a32b98923055, type: 3}
+      objectReference: {fileID: 8300000, guid: 3c9464826bd94b546b62f2352ede418d, type: 3}
     - target: {fileID: 4683799943436284767, guid: 3bda0f45e5d03364bb6e9d999c28af98,
         type: 3}
       propertyPath: announcerClip.Array.data[2]
